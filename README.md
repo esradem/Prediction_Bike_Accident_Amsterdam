@@ -61,8 +61,8 @@ This project aims to identify and predict future bike accident hotspots in Amste
      - Color-coded risk levels (red/orange/yellow)
      - Legends and detailed tooltips
      - 
-  * [Accident Clusters (2021‑2023)](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/docs/amsterdam_bike_accidents_cluster.html)
-  * [Predicted 2024 Hotspots](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/docs/hotspot_clusters_map.html)
+  * [Accident Clusters (2021‑2023)](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/amsterdam_bike_accidents_cluster.html)
+  * [Predicted 2024 Hotspots](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/hotspot_clusters_map.html)
 
 
 6. **Cluster Analysis & Reporting**
