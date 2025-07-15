@@ -60,34 +60,16 @@ This project aims to identify and predict future bike accident hotspots in Amste
      - Interactive popups (risk level, prediction score, accident count, top streets, etc.)
      - Color-coded risk levels (red/orange/yellow)
      - Legends and detailed tooltips
-   - Example outputs:
-     - [`amsterdam_bike_accidents_cluster.html`](amsterdam_bike_accidents_cluster.html)
-     - [`hotspot_clusters_map.html`](hotspot_clusters_map.html)
-     - [`future_hotspots_21_23.png`](future_hotspots_21_23.png)
+     - 
+  * [Accident Clusters (2021‑2023)](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/docs/amsterdam_bike_accidents_cluster.html)
+  * [Predicted 2024 Hotspots](https://esradem.github.io/Prediction_Bike_Accident_Amsterdam/docs/hotspot_clusters_map.html)
+
 
 6. **Cluster Analysis & Reporting**
    - Aggregate and summarize cluster-level statistics.
    - Markdown summaries of key findings and recommendations.
 
----
 
-##  Outputs
-
-- **Cleaned Data:** `data/cleaned/gdf_ams_21_23.csv`
-- **Notebooks:**
-  - Data cleaning: `notebook/01_gdf_ams_cleaning.ipynb`
-  - EDA: `notebook/02_EDA.ipynb`
-  - Prediction: `notebook/03_future_hotspot_prediction.ipynb`
-- **Python Scripts:** See `python/` directory for reusable functions and analysis scripts.
-- **Visualizations:**
-  - Static: `future_hotspots_21_23.png`
-  - Interactive: `amsterdam_bike_accidents_cluster.html`, `hotspot_clusters_map.html`
-- **Cluster Analysis:** Aggregated tables and summaries in notebooks and HTML outputs.
-
-* **Interactive Maps**
-
-  * [Accident Clusters (2021‑2023)](https://esradem.github.io/amsterdam-bike-hotspots/docs/amsterdam_bike_accidents_cluster.html)
-  * [Predicted 2024 Hotspots](https://esradem.github.io/amsterdam-bike-hotspots/docs/hotspot_clusters_map.html)
 
 ---
 
