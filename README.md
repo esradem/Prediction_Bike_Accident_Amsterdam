@@ -1,257 +1,125 @@
-# Predicting Future Bike Accident Hotspots in Amsterdam 
 
-### Using HDBSCAN Clustering & Multi-Source Data Analysis
 
-A data-driven approach to predicting future bike accident hotspots using HDBSCAN clustering and multi-source data analysis.
+##  Project Overview
 
-## Project Overview
-
-This project analyzes 29,763 bike accidents in Amsterdam (2014-2023) to identify spatial hotspots and predict future accident-prone areas. By combining coordinate data, weather patterns, and injury severity information, the system generates actionable insights for urban safety planning.
-
-##  Project Goals
-
--  Identify high-risk intersections and accident clusters  
--  Analyze how weather and time affect bike accidents  
--  Predict future hotspots using machine learning  
--  Understand the relationship between accident severity and weather conditions
+This project aims to identify and predict future bike accident hotspots in Amsterdam using advanced spatial clustering and machine learning techniques. Leveraging real accident data from 2021–2023, the project provides actionable insights for urban planners, policymakers, and the public to improve cycling safety in the city.
 
 ---
 
-## Key Features
+##  Objectives
 
-- **Spatial Clustering**: HDBSCAN algorithm identifies 170 distinct accident hotspots
-- **Weather Integration**: Incorporates 7 years of meteorological data for risk assessment
-- **Injury Analysis**: Evaluates severity patterns and fatal accident locations
-- **Future Predictions**: Generates 2025 hotspot forecasts under different weather scenarios
-- **Interactive Visualizations**: HTML maps with clickable hotspots and risk level indicators
+- **Detect spatial clusters (hotspots) of bike accidents** using HDBSCAN.
+- **Predict future accident hotspots** by combining spatial and contextual features (weather, road, light, outcome).
+- **Visualize accident clusters and predictions** with both static and interactive maps.
+- **Aggregate and analyze cluster-level information** to inform safety interventions.
+- **Summarize key findings and suggest future improvements** for data-driven urban safety.
 
-## Dataset Information
+---
 
-| Dataset          | Description                                                                |
-| ---------------- | -------------------------------------------------------------------------- |
-| `bike_data.csv`  | Raw bike accident records (2014–2023) including geolocation and timestamps |
-| `df_ams_cc.csv`  | Cleaned and clustered accident data with enriched features                 |
-| `df_wea.csv`     | Hourly weather data (temperature, wind, precipitation, visibility)         |
-| `gdf_joined.csv` | GeoDataFrame version of cleaned data for spatial plotting                  |
-| `yearly_wea.csv` | Aggregated yearly weather features used in prediction models               |
+## 📂 Dataset
 
+- **Source:** `data/cleaned/gdf_ams_21_23.csv`
+- **Description:** Contains all bike accidents in Amsterdam (2021–2023) with the following columns:
+  - `longitude`, `latitude`
+  - `weather_conditions`
+  - `road_conditions`
+  - `light_conditions`
+  - `outcome` (injury severity)
+  - `street_name`
+  - (and other relevant features)
 
-## Methodology
+**Note:** All analyses and visualizations in this project are based solely on this dataset.
 
-### 1. Data Preprocessing
-- Coordinate cleaning and Amsterdam area filtering
-- Missing value handling and outlier detection
-- Feature engineering for temporal patterns
+---
 
-### 2. HDBSCAN Clustering
-- Minimum cluster size: 50 accidents
-- Silhouette score: 0.486 (good clustering quality)
-- Mapped clusters using Folium
-- Noise point identification: 9,986 isolated incidents
+##  Methodology
 
-## Live Demo
+1. **Data Preparation & Cleaning**
+   - Notebook: [`notebook/01_gdf_ams_cleaning.ipynb`](notebook/01_gdf_ams_cleaning.ipynb)
+   - Load and clean the dataset, handle missing values, and ensure correct data types.
 
-Check out the live site here shows all the clusters in the city: [View on GitHub Pages](https://esradem.github.io/Prediction_bike_accident/)
+2. **Exploratory Data Analysis (EDA)**
+   - Notebook: [`notebook/02_EDA.ipynb`](notebook/02_EDA.ipynb)
+   - Explore spatial and contextual patterns in accident data.
+   - Visualize distributions, correlations, and trends.
 
+3. **Spatial Clustering (Hotspot Detection)**
+   - Apply HDBSCAN to identify accident clusters/hotspots.
+   - Analyze cluster characteristics (center, spread, accident count, common conditions).
 
-### 3. Risk Assessment Model
-The prediction model combines four components:
-- **Base Risk (40%)**: Historical accident frequency (log-transformed)
-- **Weather Risk (30%)**: Temperature, precipitation, wind, visibility factors
-- **Temporal Weight (20%)**: Recent year emphasis (2015+ weighted)
-- **Injury Risk (10%)**: Proximity to high-severity locations
+4. **Feature Engineering & Prediction**
+   - Notebook: [`notebook/03_future_hotspot_prediction.ipynb`](notebook/03_future_hotspot_prediction.ipynb)
+   - Encode categorical features (weather, road, light, outcome).
+   - Train machine learning models to predict future hotspot risk.
 
-- Trained Random Forest & XGBoost classifiers  
-- Predicts whether a point is a future accident hotspot  
-- Factors: location, time, weather, injury severity
+5. **Visualization**
+   - **Static Maps:** Matplotlib/Seaborn plots for publication-ready visuals.
+   - **Interactive Maps:** Folium maps with:
+     - All accident points
+     - Cluster centers
+     - Interactive popups (risk level, prediction score, accident count, top streets, etc.)
+     - Color-coded risk levels (red/orange/yellow)
+     - Legends and detailed tooltips
+   - Example outputs:
+     - [`amsterdam_bike_accidents_cluster.html`](amsterdam_bike_accidents_cluster.html)
+     - [`hotspot_clusters_map.html`](hotspot_clusters_map.html)
+     - [`future_hotspots_21_23.png`](future_hotspots_21_23.png)
 
-### 4. Future Prediction
-- Risk level classification: High (>0.7), Medium (0.4-0.7), Low (<0.4)
-- Weather scenario modeling: Normal vs Harsh conditions
-- 2025 hotspot forecasts with confidence intervals
+6. **Cluster Analysis & Reporting**
+   - Aggregate and summarize cluster-level statistics.
+   - Markdown summaries of key findings and recommendations.
 
-## Key Results
+---
 
-### Clustering Performance
-- **170 hotspot clusters** identified across Amsterdam
-- **Largest hotspot**: 1,189 accidents (Ringweg-West area)
-- **Average accidents per hotspot**: 116.3
-- **Top accident-prone street**: Ringweg-West (261 accidents)
+##  Outputs
 
-### Temporal Trends
-- **95% increase** in accidents from 2017 (2,384) to 2023 (4,660)
-- COVID-19 impact visible in 2020 data (-22.9% decrease)
-- Consistent growth pattern in post-pandemic years
+- **Cleaned Data:** `data/cleaned/gdf_ams_21_23.csv`
+- **Notebooks:**
+  - Data cleaning: `notebook/01_gdf_ams_cleaning.ipynb`
+  - EDA: `notebook/02_EDA.ipynb`
+  - Prediction: `notebook/03_future_hotspot_prediction.ipynb`
+- **Python Scripts:** See `python/` directory for reusable functions and analysis scripts.
+- **Visualizations:**
+  - Static: `future_hotspots_21_23.png`
+  - Interactive: `amsterdam_bike_accidents_cluster.html`, `hotspot_clusters_map.html`
+- **Cluster Analysis:** Aggregated tables and summaries in notebooks and HTML outputs.
 
-### Injury Severity Analysis
-- **54.4%** average injury rate across all accidents
-- **36 fatal accidents** identified in dataset
-- **34 high-risk injury locations** requiring immediate attention
+---
 
-### 2025 Predictions
-- **94 medium-risk** and **76 low-risk** hotspot predictions
-- **Highest prediction score**: 0.555 (Cluster 117 - Ringweg-West)
-- **Weather sensitivity**: 6.7% average risk increase under harsh conditions
+##  Key Findings
 
-## Installation and Usage
+- Several persistent accident hotspots were identified, often correlated with specific weather, road, and light conditions.
+- Machine learning models using spatial and contextual features improved hotspot prediction accuracy.
+- Interactive maps enable detailed exploration of risk factors and cluster characteristics.
 
-### Prerequisites
-```bash
-Python 3.8+
-pandas
-numpy
-scikit-learn
-hdbscan
-folium
-matplotlib
-seaborn
-```
+---
 
-### Installation
-```bash
-git clone https://github.com/esradem/bike-accident-hotspot-prediction.git
-cd bike-accident-hotspot-prediction
-pip install -r requirements.txt
-```
+##  Future Improvements
 
-### Running the Analysis
-```bash
-# Main prediction script
-python predict_future_hotspots.py
+- Incorporate additional features (e.g., traffic volume, time of day, infrastructure data).
+- Develop temporal models for real-time or seasonal hotspot prediction.
+- Integrate live data feeds for dynamic dashboards.
+- Expand to other cities or regions for comparative analysis.
 
-# Generate additional visualizations
-python visualize_results.py
-```
+---
 
-## Generated Outputs
+## How to Use
 
-### Interactive Maps
-- `future_hotspots_normal_2025.html`: Normal weather scenario predictions
-- `future_hotspots_harsh_2025.html`: Harsh weather scenario predictions
+1. Clone the repository and install dependencies (see `requirements.txt`).
+2. Run the notebooks in order for data cleaning, EDA, and prediction.
+3. Explore the generated visualizations and HTML maps for insights.
 
-### Analysis Reports
-- `hotspot_prediction_report.txt`: Comprehensive analysis summary
-- `hotspot_analysis_comprehensive.png`: Statistical visualizations
-- `detailed_hotspot_analysis.png`: Detailed hotspot characteristics
+---
 
-### Features of Interactive Maps
-- Clickable hotspot markers with detailed information
-- Risk level color coding (Red/Orange/Yellow)
-- Historical accident heat map overlay
-- Layer control for different visualization modes
-- Popup statistics for each hotspot cluster
+##  License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Acknowledgements
+
+- Data: Gemeente Amsterdam, KNMI, and other open data sources.
+- Libraries: HDBSCAN, scikit-learn, Folium, Matplotlib, Seaborn, Pandas, Geopandas.
 
 
-=======
-## Technical Implementation
-
-### BikeAccidentHotspotPredictor Class
-The main analysis is implemented through a comprehensive class with the following methods:
-
-- `load_data()`: Loads three independent datasets without merging
-- `preprocess_coordinate_data()`: Cleans and prepares spatial data
-- `apply_hdbscan_clustering()`: Performs spatial clustering analysis
-- `analyze_hotspot_characteristics()`: Extracts cluster statistics
-- `incorporate_weather_patterns()`: Integrates meteorological data
-- `incorporate_injury_weekday_patterns()`: Analyzes severity patterns
-- `predict_future_hotspots()`: Generates 2025 predictions
-- `create_prediction_map()`: Produces interactive visualizations
-- `generate_report()`: Creates comprehensive analysis summary
-
-### Key Algorithms
-- **HDBSCAN**: Hierarchical density-based clustering for hotspot identification
-- **Silhouette Analysis**: Clustering quality validation
-- **Feature Scaling**: StandardScaler and MinMaxScaler for data normalization
-- **Risk Scoring**: Weighted combination of historical, weather, temporal, and injury factors
-
-## Applications and Impact
-
-### Urban Planning
-- Infrastructure improvement prioritization
-- Traffic safety intervention planning
-- Resource allocation for accident prevention
-
-### Public Safety
-- Weather-based safety alert systems
-- Targeted safety campaign locations
-- Emergency response optimization
-
-### Policy Making
-- Evidence-based cycling infrastructure decisions
-- Data-driven urban mobility planning
-- Accident prevention strategy development
-
-## Future Work
-
-### Immediate Enhancements
-- Real-time traffic data integration
-- Seasonal and monthly prediction models
-- Mobile application for cyclist route optimization
-- Integration with bike-sharing system data
-
-### Research Extensions
-- Machine learning models for dynamic risk scoring
-- Expansion to other Dutch cities
-- Pedestrian accident analysis integration
-- Social and economic factor incorporation
-
-### Technical Improvements
-- API development for real-time predictions
-- Dashboard creation for city planners
-- Automated alert system implementation
-- Performance optimization for larger datasets
-
-## Validation and Limitations
-
-### Model Validation
-- Cross-validation with historical patterns
-- Silhouette score analysis for clustering quality
-- Weather scenario sensitivity testing
-- Geographic boundary validation
-
-### Current Limitations
-- Limited to Amsterdam metropolitan area
-- Weather data aggregated at yearly level
-- No real-time traffic condition integration
-- Prediction horizon limited to one year
-# Live Demo of Future Hotspot mild weather conditions interactive map
- [View on GitHub Pages mild weather condition prediction of hotspots](https://esradem.github.io/Prediction_bike_accident/future_hotspots_mild_2025.html)
-
- 
- [View on GitHub Pages normal weather condition prediction of hotspots](https://esradem.github.io/Prediction_bike_accident/future_hotspots_normal_2025.html)
- 
-
- 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Development Guidelines
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-## Acknowledgments
-
-- Amsterdam city data providers for accident and geographic information
-- Weather data sources for meteorological information
-- HDBSCAN algorithm developers for clustering methodology
-- Folium library for interactive mapping capabilities
-
-## Contact
-
-For questions, suggestions, or collaboration opportunities, contact me.
-
-## Citation
-
-If you use this work in your research, please cite:
-
-```
-Bike Accident Hotspot Prediction in Amsterdam: A Data-Driven Approach Using HDBSCAN Clustering
-[Esra Demirel], [2025]
-GitHub: https://github.com/esradem/bike-accident-hotspot-prediction
-```
