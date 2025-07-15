@@ -84,6 +84,11 @@ This project aims to identify and predict future bike accident hotspots in Amste
   - Interactive: `amsterdam_bike_accidents_cluster.html`, `hotspot_clusters_map.html`
 - **Cluster Analysis:** Aggregated tables and summaries in notebooks and HTML outputs.
 
+* **Interactive Maps**
+
+  * [Accident Clusters (2021‑2023)](https://esradem.github.io/amsterdam-bike-hotspots/docs/amsterdam_bike_accidents_cluster.html)
+  * [Predicted 2024 Hotspots](https://esradem.github.io/amsterdam-bike-hotspots/docs/hotspot_clusters_map.html)
+
 ---
 
 ##  Key Findings
@@ -111,11 +116,7 @@ This project aims to identify and predict future bike accident hotspots in Amste
 
 ---
 
-##  License
 
-MIT License. See [LICENSE](LICENSE) for details.
-
----
 
 ## Acknowledgements
 
