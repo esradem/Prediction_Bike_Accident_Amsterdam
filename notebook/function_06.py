@@ -4,7 +4,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 
 
-def load_data_with_delimiters(file_info):
+def load_csv(file_info):
     """
     Loads multiple CSV files with possibly different delimiters.
 
@@ -14,7 +14,7 @@ def load_data_with_delimiters(file_info):
     Returns:
         list: List of pandas DataFrames loaded using specified delimiters.
     """
-    return [pd.read_csv(path, delimiter=delim) for path, delim in file_info]
+    return pd.read_csv(file_info)
 
 
 def show_heads(dfs, n=5):
